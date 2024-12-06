@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.io/packages/source/i/isoduration/isoduration-{{ version }}.tar.gz
+  - url: https://pypi.org/packages/source/i/isoduration/isoduration-{{ version }}.tar.gz
     sha256: ac2f9015137935279eac671f94f89eb00584f940f5dc49462a0c4ee692ba1bd9
     folder: dist
   - url: https://github.com/bolsote/isoduration/archive/refs/tags/{{ version }}.tar.gz
@@ -13,17 +13,17 @@ source:
     folder: src
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: cd dist && {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
     - arrow >=0.15.0
-    - python >=3.7
+    - python >={{ python_min }}
 
 test:
   source_files:
@@ -42,6 +42,7 @@ test:
     - pytest
     - pytest-benchmark
     - pytest-cov
+    - python {{ python_min }}
 
 about:
   home: https://github.com/bolsote/isoduration
